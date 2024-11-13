@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 router.get("/", async (req, res) => {
     res.json({
-        message: "Hello World",
+        message: "test action",
     });
 })
 
