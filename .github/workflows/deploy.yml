@@ -1,0 +1,33 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - main # Jalankan CI/CD pada setiap push ke branch utama
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16" # Sesuaikan dengan versi Node.js yang digunakan
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build # Sesuaikan dengan perintah build proyek Anda
+
+      - name: Deploy to EC2
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+        run: |
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@your-ec2-ip "cd /path/to/your/project && git pull origin main && npm install && npm run start"  # Sesuaikan path dan perintah start sesuai kebutuhan

@@ -1,6 +1,7 @@
+require("dotenv").config();
 const router = require("express").Router();
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const imageController = require("../controllers/imageController")
+const upload = require("../libs/multer");
 
 router.get("/", async (req, res) => {
     res.json({
@@ -8,12 +9,11 @@ router.get("/", async (req, res) => {
     });
 })
 
-router.get('/users', async (req, res) => {
-    data = await prisma.user.findMany();
-    res.json(data);
-})
-
-
+router.get('/images', imageController.getImage)
+router.get('/images/:id', imageController.getImageDetail)
+router.post('/add-image', upload.single('image'), imageController.uploadImage)
+router.put('/edit-image/:id', upload.single('image'), imageController.editImage)
+router.delete('/delete-image/:id', imageController.deleteImage)
 
 
 
