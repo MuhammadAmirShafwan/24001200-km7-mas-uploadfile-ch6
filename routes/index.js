@@ -5,7 +5,7 @@ const upload = require("../libs/multer");
 
 router.get("/", async (req, res) => {
     res.json({
-        message: "test action",
+        message: "test deploy",
     });
 })
 
