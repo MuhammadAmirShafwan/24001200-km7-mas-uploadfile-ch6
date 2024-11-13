@@ -28,13 +28,13 @@ jobs:
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
         run: |
-          # Debug: Periksa folder .ssh
+          # Debug: Pastikan folder .ssh ada
           ls -la ~/.ssh
           
           # Menyimpan SSH Key dan memastikan hak akses
           echo "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           
-          # Debug: Pastikan id_rsa telah dibuat dengan benar
+          # Debug: Pastikan id_rsa telah dibuat
           ls -la ~/.ssh
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@3.104.64.107 "cd 24001200-km7-mas-uploadfile-ch6/ && git pull origin main && npm install && pm2 stop all && npx prisma generate && pm2 start npm -- start"  # Sesuaikan path dan perintah start sesuai kebutuhan
