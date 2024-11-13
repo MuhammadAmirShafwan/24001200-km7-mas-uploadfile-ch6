@@ -29,7 +29,7 @@ exports.uploadImage = async (req, res) => {
 exports.getImage = async (req, res) => {
     try {
         const data = await prisma.image.findMany();
-        data.delete("imageFieldId");
+
         res.json(data);
     } catch (error) {
         console.log(error);
