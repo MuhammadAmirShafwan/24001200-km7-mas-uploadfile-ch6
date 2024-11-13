@@ -3,7 +3,7 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - main # Jalankan CI/CD pada setiap push ke branch utama
+      - main
 
 jobs:
   deploy:
@@ -11,16 +11,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Perbarui ke v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3  # Perbarui ke v3
         with:
-          node-version: "16" # Sesuaikan dengan versi Node.js yang digunakan
+          node-version: '16'
 
       - name: Install dependencies
         run: npm install
-
+        
       #   - name: Build project
       #     run: npm run build # Sesuaikan dengan perintah build proyek Anda
 
